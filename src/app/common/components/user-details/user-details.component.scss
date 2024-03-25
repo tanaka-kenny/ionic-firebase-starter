@@ -1,20 +1,16 @@
 @import '../../../../theme/variables.scss';
 
 .content {
-  margin-top: 3rem;
-}
-
-ion-content {
-  position: relative;
+  margin-top: 4.5rem;
 }
 
 .header-text {
   color: #E8F9FD;
   font-family: var(--ion-font-montserrat);
-  font-size: 1.125rem;
   font-style: normal;
   font-weight: 400;
   line-height: normal;
+  font-size: 1.5rem;
 }
 
 .input-item {

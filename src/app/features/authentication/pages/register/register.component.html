@@ -1,5 +1,7 @@
-<app-user-details
-  [headerText]="'Update your profile details'"
-  [saveButtonText]="'Sign Up'"
-  [user]="user"
-  (saveDetails)="saveUser($event)"></app-user-details>
+<ion-content [fullscreen]="true">
+  <div class="overlay">
+    <app-background />
+  </div>
+  <app-user-details [headerText]="'Update your profile details'" [saveButtonText]="'Sign Up'" [user]="user"
+    (saveDetails)="saveUser($event)"></app-user-details>
+</ion-content>
