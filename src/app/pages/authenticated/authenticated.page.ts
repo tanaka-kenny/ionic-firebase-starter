@@ -28,7 +28,7 @@ export class AuthenticatedPage implements OnInit {
     private firestoreService: FirestoreService,
     private authService: AuthService) {
     this.menuOptions = [
-      { option: 'Profile', url: 'profile'}
+      { option: 'Profile', url: 'profile/options'}
     ];
   }
 

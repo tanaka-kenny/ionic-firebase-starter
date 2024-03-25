@@ -1,0 +1,35 @@
+<ion-content [fullscreen]="true">
+  <div class="content">
+    <ion-row>
+      <ion-col size="12">
+        <ion-text class="header-text">Profile</ion-text>
+      </ion-col>
+    </ion-row>
+
+    <ion-list [inset]="true">
+      <ng-container *ngFor="let option of profileOptions">
+        <div class="tile" (click)="onTapOption(option)">
+          <div>
+            <ion-label>
+              <ion-icon [name]="option.icon"></ion-icon>
+              {{ option.option }}
+            </ion-label>
+          </div>
+          <div>
+            <ion-icon name="chevron-forward-outline"></ion-icon>
+          </div>
+        </div>
+      </ng-container>
+
+      <div class="tile">
+        <div>
+          <ion-label>
+            <ion-icon name="log-out-outline" color="danger"></ion-icon>
+            Logout
+          </ion-label>
+        </div>
+        <div></div>
+      </div>
+    </ion-list>
+  </div>
+</ion-content>
