@@ -1,0 +1,48 @@
+@import '../../../theme/variables.scss';
+
+ion-content {
+    position: relative;
+}
+
+.text {
+    margin-top: 8rem;
+
+    h2 {
+        color: #E8F9FD;
+        font-family: var(--ion-font-montserrat);
+        font-size: 2.5rem;
+        font-style: normal;
+        font-weight: 400;
+        line-height: normal;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    ion-text {
+        color: #E8F9FD;
+        text-align: center;
+        font-family: var(--ion-font-lato);
+        font-size: 1.5rem;
+        font-style: normal;
+        font-weight: 400;
+        line-height: normal;
+    }
+}
+
+.pacifish {
+    position: absolute;
+    bottom: .825rem;
+    right: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+}
+
+.vcenter{
+    margin: 0;
+    position: absolute;
+    top: 50%;
+    -ms-transform: translateY(-50%);
+    transform: translateY(-50%);
+}

@@ -1,0 +1,43 @@
+<ion-content [fullscreen]="true">
+  <ion-menu contentId="authenticated">
+    <ion-content>
+      <div class="profile">
+        <div class="image" *ngIf="user?.profileImageUrl; else placeholder">
+          <ion-img [src]="user.profileImageUrl" alt=""></ion-img>
+        </div>
+        <ng-template #placeholder>
+          <div class="default-profile-image">
+            <svg width="132" height="132" viewBox="0 0 132 132" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <circle cx="66" cy="66" r="66" fill="white" />
+              <path
+                d="M74.8004 72.6H57.2004C52.3403 72.6 48.4004 76.54 48.4004 81.4V85.8H66.0004H83.6004V81.4C83.6004 76.54 79.6604 72.6 74.8004 72.6Z"
+                stroke="#6EAFDF" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+              <path
+                d="M66.0012 63.8C70.8612 63.8 74.8012 59.8601 74.8012 55C74.8012 50.1399 70.8612 46.2 66.0012 46.2C61.1411 46.2 57.2012 50.1399 57.2012 55C57.2012 59.8601 61.1411 63.8 66.0012 63.8Z"
+                stroke="#6EAFDF" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+            </svg>
+          </div>
+        </ng-template>
+        <ion-text *ngIf="user?.name || user?.surname">{{ user.name +' '+user.surname }}</ion-text>
+      </div>
+      <hr>
+      <div class="menu-options">
+        <ul>
+          <li *ngFor="let option of menuOptions">
+            <a [routerLink]="option.url">{{ option.option }}</a>
+          </li>
+        </ul>
+      </div>
+    </ion-content>
+  </ion-menu>
+  <div class="ion-page" id="authenticated">
+    <ion-header>
+      <ion-buttons slot="start">
+        <ion-menu-button></ion-menu-button>
+      </ion-buttons>
+    </ion-header>
+
+    <ion-router-outlet id="authenticated"></ion-router-outlet>
+  </div>
+
+</ion-content>

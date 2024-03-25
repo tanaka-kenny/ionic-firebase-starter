@@ -1,0 +1,38 @@
+.background-images {
+    position: absolute;
+    width: 120%;
+    height: 110%;
+    left: -53px;
+    top: -125px;
+    background: var(--ion-color-primary);
+    z-index: -2;
+}
+
+.filebackground {
+    position: absolute;
+    height: auto;
+    width: 15rem;
+    bottom: 1.5rem;
+    left: 2.5rem;
+}
+
+.orbContainer {
+    position: absolute;
+    z-index: -1;
+    height: 100%;
+    width: 100%;
+
+    .mainbackground {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        bottom: 0;
+    }
+}
+
+.fileContainer {
+    position: absolute;
+    z-index: -1;
+    height: 100%;
+    width: 100%;
+}

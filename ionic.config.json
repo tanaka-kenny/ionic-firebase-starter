@@ -1,0 +1,7 @@
+{
+  "name": "quizQuest",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular-standalone"
+}

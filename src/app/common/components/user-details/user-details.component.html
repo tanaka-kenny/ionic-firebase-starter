@@ -1,0 +1,66 @@
+<ion-content [fullscreen]="true">
+  <div class="overlay">
+    <app-background />
+  </div>
+
+  <div class="content">
+    <ion-text class="header-text">
+      {{ headerText | titlecase }}
+    </ion-text>
+
+    <form [formGroup]="formGroup">
+      <div class="input-item">
+        <span class="label"> Name: * </span>
+        <input [formControlName]="'name'">
+      </div>
+      <div class="input-item">
+        <span class="label"> Surname: * </span>
+        <input [formControlName]="'surname'">
+      </div>
+
+      <!-- date of birth -->
+      <div class="input-item">
+        <span class="label"> Date of birth: * </span>
+        <div class="date" (click)="setOpen(true)">
+          <input [type]="'text'" [value]="dateOfBirth ?  (dateOfBirth | date : 'dd'): null">
+          <input [type]="'text'" [value]="dateOfBirth ?  (dateOfBirth | date : 'MMM') : null">
+          <input [type]="'text'" [value]="dateOfBirth ? (dateOfBirth | date: 'yyyy') : null">
+        </div>
+
+        <ion-modal id="pick-date" [isOpen]="isModalOpen" (didDismiss)="isModalOpen = false">
+          <ng-template>
+            <ion-datetime (ionChange)="setDateOfBirth($event)" [presentation]="'date'" [showDefaultButtons]="true"
+              [max]="today"></ion-datetime>
+          </ng-template>
+        </ion-modal>
+      </div>
+
+      <!-- profile image -->
+      <div class="input-item">
+        <span class="label">Profile image: *</span>
+        <div class="profile-pic" (click)="selectImage()">
+          <div class="image" *ngIf="profilePhotoUrlControl?.value; else placeholder">
+            <ion-img [src]="profilePhotoUrlControl?.value" alt=""></ion-img>
+          </div>
+          <ng-template #placeholder>
+            <svg width="160" height="160" viewBox="0 0 160 160" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <circle cx="80" cy="80" r="80" fill="white" />
+              <path
+                d="M90.666 88H69.3327C63.4416 88 58.666 92.7757 58.666 98.6667V104H79.9993H101.333V98.6667C101.333 92.7757 96.557 88 90.666 88Z"
+                stroke="#6EAFDF" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+              <path
+                d="M79.9987 77.3333C85.8896 77.3333 90.6654 72.5577 90.6654 66.6667C90.6654 60.7756 85.8896 56 79.9987 56C74.1077 56 69.332 60.7756 69.332 66.6667C69.332 72.5577 74.1077 77.3333 79.9987 77.3333Z"
+                stroke="#6EAFDF" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+            </svg>
+          </ng-template>
+
+        </div>
+      </div>
+
+      <ion-row class="next-btn">
+        <ion-button [disabled]="formGroup.invalid" (click)="saveUserDetails()" class="btn actions-btn">{{
+          saveButtonText}}</ion-button>
+      </ion-row>
+    </form>
+  </div>
+</ion-content>

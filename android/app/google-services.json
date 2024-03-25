@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "688970826393",
+    "project_id": "quizquest-1dca2",
+    "storage_bucket": "quizquest-1dca2.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:688970826393:android:e7108cd63b15f9f092ee08",
+        "android_client_info": {
+          "package_name": "biz.pacifish"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "688970826393-7en65tgpn0qngnttjg2ve4174verja69.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "biz.pacifish",
+            "certificate_hash": "41f62f7a3e5a2e6f55b3bc02248e92c91c6cd336"
+          }
+        },
+        {
+          "client_id": "688970826393-j58163i063p7su5o6g6q96cimkf2v3kt.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBGXDwSaUSOagJovgYqefBCsb6X5E8Tmt8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "688970826393-j58163i063p7su5o6g6q96cimkf2v3kt.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

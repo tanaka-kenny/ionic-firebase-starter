@@ -1,0 +1,19 @@
+ion-content {
+    padding: 24px 0;
+}
+
+.content {
+    margin-top: 4.5rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    ion-text {
+        font-family: var(--ion-font-montserrat);
+        line-height: 1.5rem;
+        font-size: 1.125rem;
+        font-weight: 400;
+        display: inline-block;
+        text-align: center;
+    }
+}
