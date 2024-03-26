@@ -22,11 +22,18 @@ export const routes: Routes = [
   },
   {
     path: 'profile/options',
-    loadComponent: () => import('./features/profile/profile-options/profile-options.page').then(m => m.ProfileOptionsPage)
+    loadComponent: () => import('./features/profile/profile-options/profile-options.page').then(m => m.ProfileOptionsPage),
+    canActivate: [AuthGuard]
   },
   {
     path: 'profile',
-    loadComponent: () => import('./features/profile/profile.page').then(m => m.ProfilePage)
+    loadComponent: () => import('./features/profile/profile.page').then(m => m.ProfilePage),
+    canActivate: [AuthGuard]
+  },
+  {
+    path: 'change/password',
+    loadComponent: () => import('./features/profile/change-password/change-password.page').then( m => m.ChangePasswordPage),
+    canActivate: [AuthGuard]
   },
   {
     path: 'landing',

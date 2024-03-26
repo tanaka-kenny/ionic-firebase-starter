@@ -18,7 +18,7 @@ export class ProfileOptionsPage {
   constructor(private router: Router) { 
     this.profileOptions = [
       { option: 'Edit profile', url: 'profile', icon: 'person-circle-outline'},
-      { option: 'Change password', url: '', icon: 'build-outline'}
+      { option: 'Change password', url: 'change/password', icon: 'build-outline'}
     ];
   }
 
