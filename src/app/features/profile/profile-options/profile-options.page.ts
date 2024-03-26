@@ -3,13 +3,14 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
 import { Router } from '@angular/router';
+import { BackgroundComponent } from 'src/app/common/components/background/background.component';
 
 @Component({
   selector: 'app-profile-options',
   templateUrl: './profile-options.page.html',
   styleUrls: ['./profile-options.page.scss'],
   standalone: true,
-  imports: [IonicModule, CommonModule, FormsModule]
+  imports: [IonicModule, CommonModule, FormsModule, BackgroundComponent]
 })
 export class ProfileOptionsPage {
   profileOptions: ProfileOption[];
@@ -23,7 +24,7 @@ export class ProfileOptionsPage {
 
 
   onTapOption(option: ProfileOption) {
-    this.router.navigate(['authenticated', option.url]);
+    this.router.navigateByUrl(option.url);
   }
 
 }

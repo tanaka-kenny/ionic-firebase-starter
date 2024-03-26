@@ -24,7 +24,7 @@
       <div class="menu-options">
         <ul>
           <li *ngFor="let option of menuOptions">
-            <a [routerLink]="option.url">{{ option.option }}</a>
+            <a (click)="onTapOption(option.url)">{{ option.option }}</a>
           </li>
         </ul>
       </div>

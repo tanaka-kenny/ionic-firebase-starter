@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
-import { RouterModule } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 import { FirestoreService } from 'src/app/common/service/firestore.service';
 import { AuthService } from 'src/app/common/service/auth.service';
 import { switchMap } from 'rxjs';
@@ -26,7 +26,8 @@ export class AuthenticatedPage implements OnInit {
 
   constructor(
     private firestoreService: FirestoreService,
-    private authService: AuthService) {
+    private authService: AuthService,
+    private router: Router) {
     this.menuOptions = [
       { option: 'Profile', url: 'profile/options'}
     ];
@@ -41,6 +42,10 @@ export class AuthenticatedPage implements OnInit {
       user.profileImageUrl = user.profileImageUrl
 
     });
+  }
+
+  onTapOption(url: string) {
+    this.router.navigateByUrl(url)
   }
 
 }

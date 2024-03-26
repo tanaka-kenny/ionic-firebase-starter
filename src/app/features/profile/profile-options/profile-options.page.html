@@ -1,10 +1,14 @@
+<ion-toolbar>
+  <ion-buttons slot="start">
+    <ion-back-button default-href=""></ion-back-button>
+  </ion-buttons>
+  <ion-title><ion-text class="header-text">Profile Options</ion-text></ion-title>
+</ion-toolbar>
 <ion-content [fullscreen]="true">
+  <div>
+    <app-background />
+  </div>
   <div class="content">
-    <ion-row>
-      <ion-col size="12">
-        <ion-text class="header-text">Profile</ion-text>
-      </ion-col>
-    </ion-row>
 
     <ion-list [inset]="true">
       <ng-container *ngFor="let option of profileOptions">
@@ -20,6 +24,8 @@
           </div>
         </div>
       </ng-container>
+
+      <hr>
 
       <div class="tile">
         <div>
