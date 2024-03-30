@@ -1,7 +1,7 @@
 import { Injectable, inject } from '@angular/core';
-import { Auth, FacebookAuthProvider, GoogleAuthProvider, createUserWithEmailAndPassword, signInWithEmailAndPassword, user, User, signInWithRedirect, signInWithCredential, signOut } from '@angular/fire/auth';
+import { Auth, GoogleAuthProvider, createUserWithEmailAndPassword, signInWithEmailAndPassword, user, User, signInWithCredential, signOut, reauthenticateWithCredential, EmailAuthProvider, updatePassword } from '@angular/fire/auth';
 import { Router } from '@angular/router';
-import {switchMap, take} from 'rxjs';
+import {switchMap, take, tap} from 'rxjs';
 import { NotificationService } from './notification.service';
 import {FirestoreService} from './firestore.service';
 import { UserDetail } from '../model/user-detail.model';
@@ -18,7 +18,7 @@ export class AuthService {
   private alertService = inject(NotificationService)
   private firestoreService = inject(FirestoreService);
 
-  googleAuth() {
+  public googleAuth() {
 
     FirebaseAuthentication.signInWithGoogle()
       .then((result) => {
@@ -101,6 +101,24 @@ export class AuthService {
         signOut(this.auth);
         this.router.navigate(['login'])
       });
+  }
+
+  public changePassword(oldPassword: string, newPassword: string) {
+    const user = this.auth.currentUser;
+    
+    if (user) {
+      const credential = EmailAuthProvider.credential(user.email!, oldPassword);
+      reauthenticateWithCredential(user, credential)
+        .then(() => {
+          console.log('Successfully re-authenticated user, now updating the password!');
+
+          updatePassword(user, newPassword)
+            .then(() => {
+              console.log('Successfully updated the user password')
+            })
+          
+        })
+    }
   }
 
   get currentUserObservable$() { // todo: use savedUserObservable instead

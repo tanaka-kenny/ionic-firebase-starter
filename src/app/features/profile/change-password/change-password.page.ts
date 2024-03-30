@@ -3,35 +3,34 @@ import { CommonModule } from '@angular/common';
 import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
 import { BackgroundComponent } from 'src/app/common/components/background/background.component';
+import { AuthService } from 'src/app/common/service/auth.service';
 
 @Component({
   selector: 'app-change-password',
   templateUrl: './change-password.page.html',
   styleUrls: ['./change-password.page.scss'],
   standalone: true,
-  imports: [IonicModule, CommonModule, FormsModule, BackgroundComponent, ReactiveFormsModule, ]
+  imports: [IonicModule, CommonModule, FormsModule, BackgroundComponent, ReactiveFormsModule]
 })
-export class ChangePasswordPage implements OnInit {
+export class ChangePasswordPage {
   formGroup: FormGroup;
 
   constructor(
-    private formBuilder: FormBuilder) { 
+    private formBuilder: FormBuilder,
+    private authService: AuthService) { 
       this.formGroup = this.createForm();
     }
 
-  ngOnInit() {
-  }
-
   private createForm() {
     return this.formBuilder.group({
-      oldPasswordControl: ['',
-        [Validators.required, Validators.email]
+      oldPassword: ['',
+        [Validators.required, Validators.minLength(6)]
       ],
       password: ['',
         [ Validators.required, Validators.minLength(6)]
       ],
       confirmPassword: ['',
-        [Validators.required, Validators.min(6)]
+        [Validators.required]
       ]
     },{ validator: this.matchPassword( 'password', 'confirmPassword' ) });
   }
@@ -54,6 +53,13 @@ export class ChangePasswordPage implements OnInit {
     };
   }
 
+  changePassword() {
+      const oldPassword = this.oldPasswordControl?.value as string;
+      const newPassword = this.passwordControl?.value as string;
+      
+      this.authService.changePassword(oldPassword, newPassword);
+  }
+
   get passwordControl() {
     return this.formGroup.get('password');
   }
@@ -63,7 +69,7 @@ export class ChangePasswordPage implements OnInit {
   }
 
   get oldPasswordControl() {
-    return this.formGroup.get('oldPasswordControl')
+    return this.formGroup.get('oldPassword')
   }
 
 }
