@@ -2,12 +2,11 @@ export const environment = {
   production: true,
   useEmulators: false,
   firebase: {
-    apiKey: "AIzaSyC5PemASz1ZjWui_3X3r3lA7qfPPuTK3nY",
-    authDomain: "quizquest-1dca2.firebaseapp.com",
-    projectId: "quizquest-1dca2",
-    storageBucket: "quizquest-1dca2.appspot.com",
-    messagingSenderId: "688970826393",
-    appId: "1:688970826393:web:53e657b7f1cd710592ee08",
-    measurementId: "G-GP6YSXX0Y8"
+    apiKey: "AIzaSyDqKIS0Yj6TMszb88JBDkxvWp877a223HY",
+    authDomain: "ionic-starter-6e5fa.firebaseapp.com",
+    projectId: "ionic-starter-6e5fa",
+    storageBucket: "ionic-starter-6e5fa.appspot.com",
+    messagingSenderId: "230800217587",
+    appId: "1:230800217587:web:3446db1006969fa3b06e86"
   }
 };

@@ -1,10 +1,10 @@
 apply plugin: 'com.android.application'
 
 android {
-    namespace "biz.pacifish"
+    namespace "biz.pacifish.ionic.starter"
     compileSdkVersion rootProject.ext.compileSdkVersion
     defaultConfig {
-        applicationId "biz.pacifish"
+        applicationId "biz.pacifish.ionic.starter"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 1
@@ -40,8 +40,7 @@ dependencies {
     androidTestImplementation "androidx.test.ext:junit:$androidxJunitVersion"
     androidTestImplementation "androidx.test.espresso:espresso-core:$androidxEspressoCoreVersion"
     implementation project(':capacitor-cordova-android-plugins')
-
-    // Import the BoM for the Firebase platform
+        // Import the BoM for the Firebase platform
     implementation(platform("com.google.firebase:firebase-bom:32.7.4"))
     // Add the dependency for the Firebase Authentication library
     // When using the BoM, you don't specify versions in Firebase library dependencies

@@ -1,4 +1,4 @@
-package biz.pacifish;
+package biz.pacifish.ionic.starter;
 
 import com.getcapacitor.BridgeActivity;
 

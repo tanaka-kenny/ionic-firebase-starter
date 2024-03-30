@@ -7,8 +7,8 @@ const config: CapacitorConfig = {
       providers: ["google.com"],
     }
   },
-  appId: 'biz.pacifish',
-  appName: 'quizQuest',
+  appId: 'biz.pacifish.ionic.starter', // TODO: Replace with your appId
+  appName: 'ionic-starter', // TODO: Replace with your appName
   webDir: 'www',
   server: {
     androidScheme: 'https'

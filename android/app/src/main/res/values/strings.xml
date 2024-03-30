@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='utf-8'?>
 <resources>
-    <string name="app_name">quizQuest</string>
-    <string name="title_activity_main">quizQuest</string>
-    <string name="package_name">biz.pacifish</string>
-    <string name="custom_url_scheme">biz.pacifish</string>
+    <string name="app_name">ionic-starter</string>
+    <string name="title_activity_main">ionic-starter</string>
+    <string name="package_name">biz.pacifish.ionic.starter</string>
+    <string name="custom_url_scheme">biz.pacifish.ionic.starter</string>
 </resources>
