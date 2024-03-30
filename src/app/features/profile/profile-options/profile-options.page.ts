@@ -4,6 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
 import { Router } from '@angular/router';
 import { BackgroundComponent } from 'src/app/common/components/background/background.component';
+import { AuthService } from 'src/app/common/service/auth.service';
 
 @Component({
   selector: 'app-profile-options',
@@ -15,7 +16,9 @@ import { BackgroundComponent } from 'src/app/common/components/background/backgr
 export class ProfileOptionsPage {
   profileOptions: ProfileOption[];
 
-  constructor(private router: Router) { 
+  constructor(
+    private router: Router,
+    private authService: AuthService) { 
     this.profileOptions = [
       { option: 'Edit profile', url: 'profile', icon: 'person-circle-outline'},
       { option: 'Change password', url: 'change/password', icon: 'build-outline'}
@@ -27,6 +30,9 @@ export class ProfileOptionsPage {
     this.router.navigateByUrl(option.url);
   }
 
+  onSignOut() {
+    this.authService.signOut();
+  }
 }
 
 export interface ProfileOption {

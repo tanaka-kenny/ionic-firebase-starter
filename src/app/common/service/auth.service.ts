@@ -1,5 +1,5 @@
 import { Injectable, inject } from '@angular/core';
-import { Auth, FacebookAuthProvider, GoogleAuthProvider, createUserWithEmailAndPassword, signInWithEmailAndPassword, user, User, signInWithRedirect, signInWithCredential } from '@angular/fire/auth';
+import { Auth, FacebookAuthProvider, GoogleAuthProvider, createUserWithEmailAndPassword, signInWithEmailAndPassword, user, User, signInWithRedirect, signInWithCredential, signOut } from '@angular/fire/auth';
 import { Router } from '@angular/router';
 import {switchMap, take} from 'rxjs';
 import { NotificationService } from './notification.service';
@@ -32,7 +32,6 @@ export class AuthService {
 
         if (result.additionalUserInfo?.isNewUser) {
           let userObject = this.constructUserFromAuthUser(user);
-          console.log(userObject);
 
           this.firestoreService.saveUser(userObject);
           this.router.navigate(['register']);
@@ -94,6 +93,14 @@ export class AuthService {
             'toast-class-error');
         }
       })
+  }
+
+  public signOut() {
+    FirebaseAuthentication.signOut()
+      .then(() => {
+        signOut(this.auth);
+        this.router.navigate(['login'])
+      });
   }
 
   get currentUserObservable$() { // todo: use savedUserObservable instead
