@@ -14,7 +14,7 @@ export class NotificationService {
     cssClass: string | string[] = 'toast-class') {
     this.toastController.create({
       message: message,
-      duration: 1500,
+      duration: 5000,
       position: position,
       cssClass: cssClass,
       translucent: true
