@@ -1,7 +1,9 @@
 import { Injectable, inject } from '@angular/core';
-import { Auth, GoogleAuthProvider, createUserWithEmailAndPassword, signInWithEmailAndPassword, user, User, signInWithCredential, signOut, reauthenticateWithCredential, EmailAuthProvider, updatePassword } from '@angular/fire/auth';
+import { Auth, GoogleAuthProvider, createUserWithEmailAndPassword, signInWithEmailAndPassword, 
+  user, User, signInWithCredential, signOut, reauthenticateWithCredential, EmailAuthProvider,
+   updatePassword } from '@angular/fire/auth';
 import { Router } from '@angular/router';
-import {switchMap, take, tap} from 'rxjs';
+import {switchMap, take} from 'rxjs';
 import { NotificationService } from './notification.service';
 import {FirestoreService} from './firestore.service';
 import { UserDetail } from '../model/user-detail.model';
@@ -17,6 +19,7 @@ export class AuthService {
   private router = inject(Router);
   private alertService = inject(NotificationService)
   private firestoreService = inject(FirestoreService);
+  private notificationService = inject(NotificationService);
 
   public googleAuth() {
 
@@ -115,8 +118,13 @@ export class AuthService {
           updatePassword(user, newPassword)
             .then(() => {
               console.log('Successfully updated the user password')
+              this.notificationService.presentToast('top', 'You have sucessfully update your password!', 'toast-class-error')
             })
           
+        }).catch(error => {
+          if (error.code == 'auth/invalid-login-credentials') {
+            this.notificationService.presentToast('top', 'Please enter a valid password!')
+          }
         })
     }
   }
