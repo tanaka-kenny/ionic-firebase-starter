@@ -1,5 +1,7 @@
 import { Injectable, inject } from '@angular/core';
-import { Auth, FacebookAuthProvider, GoogleAuthProvider, createUserWithEmailAndPassword, signInWithEmailAndPassword, user, User, signInWithRedirect, signInWithCredential } from '@angular/fire/auth';
+import { Auth, GoogleAuthProvider, createUserWithEmailAndPassword, signInWithEmailAndPassword, 
+  user, User, signInWithCredential, signOut, reauthenticateWithCredential, EmailAuthProvider,
+   updatePassword } from '@angular/fire/auth';
 import { Router } from '@angular/router';
 import {switchMap, take} from 'rxjs';
 import { NotificationService } from './notification.service';
@@ -17,8 +19,9 @@ export class AuthService {
   private router = inject(Router);
   private alertService = inject(NotificationService)
   private firestoreService = inject(FirestoreService);
+  private notificationService = inject(NotificationService);
 
-  googleAuth() {
+  public googleAuth() {
 
     FirebaseAuthentication.signInWithGoogle()
       .then((result) => {
@@ -32,7 +35,6 @@ export class AuthService {
 
         if (result.additionalUserInfo?.isNewUser) {
           let userObject = this.constructUserFromAuthUser(user);
-          console.log(userObject);
 
           this.firestoreService.saveUser(userObject);
           this.router.navigate(['register']);
@@ -94,6 +96,37 @@ export class AuthService {
             'toast-class-error');
         }
       })
+  }
+
+  public signOut() {
+    FirebaseAuthentication.signOut()
+      .then(() => {
+        signOut(this.auth);
+        this.router.navigate(['login'])
+      });
+  }
+
+  public changePassword(oldPassword: string, newPassword: string) {
+    const user = this.auth.currentUser;
+    
+    if (user) {
+      const credential = EmailAuthProvider.credential(user.email!, oldPassword);
+      reauthenticateWithCredential(user, credential)
+        .then(() => {
+          console.log('Successfully re-authenticated user, now updating the password!');
+
+          updatePassword(user, newPassword)
+            .then(() => {
+              console.log('Successfully updated the user password')
+              this.notificationService.presentToast('top', 'You have sucessfully update your password!', 'toast-class-error')
+            })
+          
+        }).catch(error => {
+          if (error.code == 'auth/invalid-login-credentials') {
+            this.notificationService.presentToast('top', 'Please enter a valid password!')
+          }
+        })
+    }
   }
 
   get currentUserObservable$() { // todo: use savedUserObservable instead

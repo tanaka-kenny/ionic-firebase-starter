@@ -2,8 +2,6 @@ import { Routes } from '@angular/router';
 import { AuthenticatedPage } from './pages/authenticated/authenticated.page';
 import { HomePage } from './features/home/home.page';
 import { AuthGuard } from './common/guard/auth.guard';
-import {ProfilePage} from './features/profile/profile.page';
-import { ProfileOptionsPage } from './features/profile/profile-options/profile-options.page';
 
 export const routes: Routes = [
   {
@@ -19,16 +17,23 @@ export const routes: Routes = [
       {
         path: 'home',
         component: HomePage
-      },
-      {
-        path: 'profile/options',
-        component: ProfileOptionsPage
-      },
-      {
-        path: 'profile',
-        component: ProfilePage
       }
     ]
+  },
+  {
+    path: 'profile/options',
+    loadComponent: () => import('./features/profile/profile-options/profile-options.page').then(m => m.ProfileOptionsPage),
+    canActivate: [AuthGuard]
+  },
+  {
+    path: 'profile',
+    loadComponent: () => import('./features/profile/profile.page').then(m => m.ProfilePage),
+    canActivate: [AuthGuard]
+  },
+  {
+    path: 'change/password',
+    loadComponent: () => import('./features/profile/change-password/change-password.page').then( m => m.ChangePasswordPage),
+    canActivate: [AuthGuard]
   },
   {
     path: 'landing',

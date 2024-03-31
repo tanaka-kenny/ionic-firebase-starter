@@ -1,5 +1,11 @@
+<ion-toolbar>
+  <ion-buttons slot="start">
+    <ion-back-button default-href=""></ion-back-button>
+  </ion-buttons>
+  <ion-title>Back</ion-title>
+</ion-toolbar>
 <ion-content [fullscreen]="true">
-  <div class="overlay">
+  <div>
     <app-background />
   </div>
   <app-user-details [headerText]="'Update your profile details'" [saveButtonText]="'Update Profile'" [user]="user"

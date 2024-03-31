@@ -1,41 +1,41 @@
 {
   "project_info": {
-    "project_number": "688970826393",
-    "project_id": "quizquest-1dca2",
-    "storage_bucket": "quizquest-1dca2.appspot.com"
+    "project_number": "230800217587",
+    "project_id": "ionic-starter-6e5fa",
+    "storage_bucket": "ionic-starter-6e5fa.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:688970826393:android:e7108cd63b15f9f092ee08",
+        "mobilesdk_app_id": "1:230800217587:android:c15e66871c6e7ea9b06e86",
         "android_client_info": {
-          "package_name": "biz.pacifish"
+          "package_name": "biz.pacifish.ionic.starter"
         }
       },
       "oauth_client": [
         {
-          "client_id": "688970826393-7en65tgpn0qngnttjg2ve4174verja69.apps.googleusercontent.com",
+          "client_id": "230800217587-ptpnqplpskl5980354ij7s6h1v48tmhh.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
-            "package_name": "biz.pacifish",
+            "package_name": "biz.pacifish.ionic.starter",
             "certificate_hash": "41f62f7a3e5a2e6f55b3bc02248e92c91c6cd336"
           }
         },
         {
-          "client_id": "688970826393-j58163i063p7su5o6g6q96cimkf2v3kt.apps.googleusercontent.com",
+          "client_id": "230800217587-1b8lld7n4rml9oahenfrnu2hjq4nknhd.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyBGXDwSaUSOagJovgYqefBCsb6X5E8Tmt8"
+          "current_key": "AIzaSyCLKYLBp1zYFzIPqEW8ycHuVdHki07J_oc"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "688970826393-j58163i063p7su5o6g6q96cimkf2v3kt.apps.googleusercontent.com",
+              "client_id": "230800217587-1b8lld7n4rml9oahenfrnu2hjq4nknhd.apps.googleusercontent.com",
               "client_type": 3
             }
           ]
