@@ -30,7 +30,7 @@ export class ProfilePage implements OnInit{
   }
 
   updateProfile(user: UserDetail) {
-    this.firestoreService.saveUser(user)
+    this.firestoreService.updateUser(user)
       .then(() => this.router.navigate(['authenticated', 'home']));
   }
 }
