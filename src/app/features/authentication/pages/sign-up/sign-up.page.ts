@@ -4,6 +4,7 @@ import { IonicModule } from '@ionic/angular';
 import { BackgroundComponent } from 'src/app/common/components/background/background.component';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { AuthService } from 'src/app/common/service/auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-sign-up',
@@ -18,7 +19,8 @@ export class SignUpPage {
 
  constructor(
   private formBuilder: FormBuilder,
-  private authService: AuthService) {
+  private authService: AuthService,
+  private router: Router) {
   this.formGroup  = this.createForm();
  }
 
@@ -34,6 +36,10 @@ export class SignUpPage {
         [Validators.required, Validators.min(6)]
       ]
     },{ validator: this.matchPassword( 'password', 'confirmPassword' ) });
+  }
+
+  onLogin() {
+    this.router.navigate(['login'])
   }
 
   googleAuth() {

@@ -99,3 +99,15 @@ p.error-text {
     justify-content: center;
     margin-top: 2.5rem;
 }
+
+.login-prompt {
+    display: block;
+    color: var(--ion-text-color);
+    text-align: center;
+    font-family: Montserrat;
+    font-size: 1rem;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+    text-decoration-line: underline;
+}

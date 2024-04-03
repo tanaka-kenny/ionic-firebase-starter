@@ -3,7 +3,7 @@ import { Auth, GoogleAuthProvider, createUserWithEmailAndPassword, signInWithEma
   user, User, signInWithCredential, signOut, reauthenticateWithCredential, EmailAuthProvider,
    updatePassword } from '@angular/fire/auth';
 import { Router } from '@angular/router';
-import {switchMap, take} from 'rxjs';
+import {Observable, map, switchMap, take} from 'rxjs';
 import { NotificationService } from './notification.service';
 import {FirestoreService} from './firestore.service';
 import { UserDetail } from '../model/user-detail.model';
@@ -57,8 +57,8 @@ export class AuthService {
   }
   emailAndPasswordAuth(email: string, password: string) {
     signInWithEmailAndPassword(this.auth, email, password)
-      .then(() => {
-        this.savedUserObservable$.pipe(take(1)).subscribe(user => {
+      .then((result) => {
+        this.firestoreService.userInfo(result.user.uid).pipe(take(1)).subscribe(user => {
           if (user && user.hasCompletedRegistration) {
             this.router.navigate(['authenticated', 'home']);
           } else {
@@ -133,11 +133,7 @@ export class AuthService {
     return user(this.auth);
   }
 
-  getUID(): string | null {
-    return this.auth.currentUser?.uid || null;
-  }
-
-  get savedUserObservable$(){
+  get savedUserObservable$(): Observable<UserDetail>{ // TODO: Chat to Migal about using ngrx for this
     return this.currentUserObservable$.pipe(switchMap(user => {
       return this.firestoreService.userInfo(user?.uid!)
     }));
