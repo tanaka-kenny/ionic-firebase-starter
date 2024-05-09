@@ -15,3 +15,17 @@ export const loadUserDetailsFailure = createAction(
     '[Todo API] Load User Details Load Failure',
     props<{ error: string }>()
   );
+
+export const updateUserDetails = createAction(
+  '[Profile/ Reg Page] Update User Details',
+  props<{ userDetail: UserDetail }>()
+);
+
+export const updateUserDetailsSuccess = createAction(
+  '[Firestore Service] Update User Details Success'
+);
+
+export const updateUserDetailsFailure = createAction(
+  '[Firestore Service] Update User Details Failure',
+  props<{ error: string }>()
+);

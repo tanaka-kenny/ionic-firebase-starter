@@ -50,4 +50,8 @@ export class AuthenticatedPage implements OnInit {
     this.router.navigateByUrl(url)
   }
 
+  onSignOut() {
+    this.authService.signOut();
+  }
+
 }

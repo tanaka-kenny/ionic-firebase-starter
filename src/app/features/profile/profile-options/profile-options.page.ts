@@ -29,10 +29,6 @@ export class ProfileOptionsPage {
   onTapOption(option: ProfileOption) {
     this.router.navigateByUrl(option.url);
   }
-
-  onSignOut() {
-    this.authService.signOut();
-  }
 }
 
 export interface ProfileOption {

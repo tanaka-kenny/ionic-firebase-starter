@@ -1,8 +1,8 @@
 import { Injectable, inject } from "@angular/core";
 import { Actions, createEffect, ofType } from "@ngrx/effects";
 import { FirestoreService } from "src/app/common/service/firestore.service";
-import { loadUserDetails, loadUserDetailsFailure, loadUserDetailsSuccess } from "./user-detail.action";
-import { catchError, exhaustMap, map, of, switchMap } from "rxjs";
+import { loadUserDetails, loadUserDetailsFailure, loadUserDetailsSuccess, updateUserDetails, updateUserDetailsFailure, updateUserDetailsSuccess } from "./user-detail.action";
+import { catchError, from, map, mergeMap, of, switchMap } from "rxjs";
 
 @Injectable()
 export class UserDetailEffects {
@@ -19,6 +19,17 @@ export class UserDetailEffects {
             )
         )
     ));
-
-
+    
+    updateUserDetail$ = createEffect(() => 
+      this.actions$.pipe(
+        ofType(updateUserDetails),
+        mergeMap(({ userDetail }) => 
+          from(this.firestoreService.updateUser(userDetail)).pipe(
+            map(() => updateUserDetailsSuccess()),
+            catchError((error) => of(updateUserDetailsFailure({ error })))
+          )
+        )
+      )
+    );
+    
 }
