@@ -8,7 +8,9 @@ import { NotificationService } from './notification.service';
 import {FirestoreService} from './firestore.service';
 import { UserDetail } from '../model/user-detail.model';
 import { FirebaseAuthentication } from '@capacitor-firebase/authentication';
+import { Storage } from '@ionic/storage-angular';
 
+const UID_KEY = 'uuid'
 
 @Injectable({
   providedIn: 'root'
@@ -20,6 +22,16 @@ export class AuthService {
   private alertService = inject(NotificationService)
   private firestoreService = inject(FirestoreService);
   private notificationService = inject(NotificationService);
+  private _storage: Storage | null = null;
+
+  constructor(private storage: Storage) {
+    this.init();
+  }
+
+  async init() {
+    const storage = await this.storage.create();
+    this._storage = storage;
+  }
 
   public googleAuth() {
 
@@ -32,6 +44,7 @@ export class AuthService {
         .then((authUser) => {
 
         const {user} = authUser;
+        this._storage?.set(UID_KEY, user.uid);
 
         if (result.additionalUserInfo?.isNewUser) {
           let userObject = this.constructUserFromAuthUser(user);
@@ -53,11 +66,13 @@ export class AuthService {
           .catch(error => {
             console.log(error.message);
           })
-      })
+      }).catch(err => console.log(err)
+      )
   }
   emailAndPasswordAuth(email: string, password: string) {
     signInWithEmailAndPassword(this.auth, email, password)
       .then((result) => {
+        this._storage?.set(UID_KEY, result.user.uid);
         this.firestoreService.userInfo(result.user.uid).pipe(take(1)).subscribe(user => {
           if (user && user.hasCompletedRegistration) {
             this.router.navigate(['authenticated', 'home']);
@@ -99,6 +114,8 @@ export class AuthService {
   }
 
   public signOut() {
+    this._storage?.remove(UID_KEY);
+
     FirebaseAuthentication.signOut()
       .then(() => {
         signOut(this.auth);
@@ -131,6 +148,10 @@ export class AuthService {
 
   get currentUserObservable$() { // todo: use savedUserObservable instead
     return user(this.auth);
+  }
+
+  getUid() {
+    return this._storage?.get(UID_KEY);
   }
 
   get savedUserObservable$(): Observable<UserDetail>{ // TODO: Chat to Migal about using ngrx for this

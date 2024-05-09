@@ -4,15 +4,25 @@ import { loadUserDetails, loadUserDetailsFailure, loadUserDetailsSuccess } from 
 
 export interface UserDetailState {
     userDetail: UserDetail;
+    error: string;
+    status: 'pending' | 'loading' | 'error' | 'success'
 }
 
 const initialState: UserDetailState = {
-    userDetail: { uid: '' }
+    userDetail: { uid: '' },
+    error: '',
+    status: 'pending'
 };
 
 export const userDetailReducer = createReducer(
     initialState,
-    on(loadUserDetails, (state) => state),
-    on(loadUserDetailsSuccess, (state, { userDetails }) =>({ ...state, userDetail: userDetails })),
-    on(loadUserDetailsFailure, (state, { error }) => state)
+    on(loadUserDetails, (state) => ({...state, status: <const> 'loading' })),
+    on(loadUserDetailsSuccess, (state, { userDetail }) =>({ 
+        ...state, 
+        userDetail: userDetail, 
+        error: '', 
+        status: <const>'success'
+    })
+    ),
+    on(loadUserDetailsFailure, (state, { error }) => ({...state, error: error}))
 );

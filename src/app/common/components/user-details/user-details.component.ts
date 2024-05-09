@@ -6,6 +6,11 @@ import {DatePipe, NgIf, TitleCasePipe} from '@angular/common';
 import { UserDetail } from 'src/app/common/model/user-detail.model';
 import {Observable} from "rxjs";
 import { PhotoService } from 'src/app/common/service/photo.service';
+import { AppState } from 'src/app/features/state/app.state';
+import { Store } from '@ngrx/store';
+import { selectUserDetail } from 'src/app/features/state/user-detail/user-detail.selector';
+import { loadUserDetails } from 'src/app/features/state/user-detail/user-detail.action';
+import { AuthService } from '../../service/auth.service';
 
 @Component({
   selector: 'app-user-details',
@@ -27,8 +32,7 @@ export class UserDetailsComponent {
   headerText = '';
   @Input()
   saveButtonText = '';
-  @Input()
-  user!: Observable<UserDetail>;
+  user$!: Observable<UserDetail>;
   @Output()
   saveDetails = new EventEmitter<UserDetail>();
   uid!: string;
@@ -38,21 +42,29 @@ export class UserDetailsComponent {
   formGroup: FormGroup;
 
   constructor(
-    private photoService: PhotoService) {
+    private authService: AuthService,
+    private photoService: PhotoService,
+    private readonly store: Store<AppState>) {
     this.formGroup = this.createForm();
+    this.user$ = store.select(selectUserDetail);
   }
 
   ngOnInit() {
-    this.user?.subscribe(user => {
-      this.uid = user.uid!;
+    this.authService.getUid()?.then(uid => {
+      this.store.dispatch(loadUserDetails({ uid }));
 
-      this.setFormWithExistingUserState(user);
-
-      if (user.dateOfBirth) {
-        this.dateOfBirth = new Date(user.dateOfBirth);
-      }
-
+      this.user$.subscribe(user => {
+        this.uid = user.uid!;
+  
+        this.setFormWithExistingUserState(user);
+  
+        if (user.dateOfBirth) {
+          this.dateOfBirth = new Date(user.dateOfBirth);
+        }
+  
+      });
     });
+
   }
 
   selectImage() {
